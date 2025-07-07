@@ -47,7 +47,6 @@ export default class SecretSantaService {
 			)
 		}
 
-
 		this._saveAssignments(assignments)
 		return assignments
 	}
