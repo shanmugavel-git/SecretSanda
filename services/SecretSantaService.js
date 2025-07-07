@@ -17,23 +17,36 @@ export default class SecretSantaService {
 		let shuffled = this._shuffleArray([...names])
 
 		const assignments = {}
+		let success = false
+		let attempts = 0
 
-		for (let i = 0; i < names.length; i++) {
-			const giver = names[i]
-			const receiver = shuffled[i]
+		while (!success && attempts < 10) {
+			attempts++
+			const shuffled = this._shuffleArray([...names])
+			success = true
+			for (let i = 0; i < names.length; i++) {
+				const giver = names[i]
+				const receiver = shuffled[i]
 
-			if (!giver || !receiver) {
-				throw new Error(
-					`Invalid name found: giver=${giver}, receiver=${receiver}`
-				)
+				if (
+					!giver ||
+					!receiver ||
+					giver === receiver ||
+					previousAssignments[giver] === receiver
+				) {
+					success = false
+					break // Try again
+				}
+				assignments[giver] = receiver
 			}
-
-			if (giver === receiver) {
-				throw new Error(`Conflict: ${giver} assigned themselves`)
-			}
-
-			assignments[giver] = receiver
 		}
+
+		if (!success) {
+			throw new Error(
+				'Failed to generate a conflict-free assignment after 10 attempts.'
+			)
+		}
+
 
 		this._saveAssignments(assignments)
 		return assignments
