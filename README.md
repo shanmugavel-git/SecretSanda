@@ -45,15 +45,13 @@ npm start
 
 curl -X POST http://localhost:3000/santa/assign
 
-Note:
-
-Repeat this above curl command till you get the result, sometimes it will shows the conflict message like below
-{"error":"Conflict: Matthew King assigned themselves"}.
-
-If you get the result format like below:
-
+Sample output (In TERMINAL):
+---------------------------
 {"Hamish Murray":"Matthew King","Layla Graham":"Charlie Ross","Matthew King":"Spencer Allen","Benjamin Collins":"Charlie Wright","Isabella Scott":"Piper Stewart","Charlie Ross":"Ethan Murray","Piper Stewart":"Layla Graham","Spencer Allen":"Benjamin Collins","Charlie Wright":"Mark Lawrence","Ethan Murray":"Hamish Murray","Mark Lawrence":"Hamish Murray"}
 
+--------
+
+Output file generated:
 -- you can confirm the out put generated inside the folder 'data', with file name: Secret-Santa-Assignments.csv
 
 
